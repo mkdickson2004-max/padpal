@@ -10,7 +10,7 @@ import { supabase } from '../src/lib/supabase';
 import { API_BASE_URL } from '../src/lib/config';
 import * as ImagePicker from 'expo-image-picker';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { HouseChatScreen, BillsExpensesScreen } from '../components/Screens';
+import { BillsExpensesScreen } from '../components/Screens';
 
 const { width } = Dimensions.get('window');
 
@@ -57,7 +57,7 @@ interface LeaderboardEntry {
   id: string; user_id: string; points: number; category: string;
 }
 
-type TabKey = 'home' | 'chores' | 'bills' | 'leaderboard' | 'chat';
+type TabKey = 'home' | 'chores' | 'bills' | 'leaderboard';
 
 // ─── Chore types ─────────────────────────────────────────────
 const CHORES = [
@@ -458,9 +458,7 @@ export default function DashboardScreen() {
       </View>
 
       {/* Content */}
-      {activeTab === 'chat' ? (
-        <HouseChatScreen />
-      ) : activeTab === 'bills' ? (
+      {activeTab === 'bills' ? (
         <BillsExpensesScreen />
       ) : (
         <ScrollView
@@ -477,7 +475,6 @@ export default function DashboardScreen() {
       {/* ─── Bottom Tab Bar ──── */}
       <View style={styles.tabBar}>
         <TabButton icon="🏠" label="Home" active={activeTab === 'home'} onPress={() => setActiveTab('home')} />
-        <TabButton icon="💬" label="Chat" active={activeTab === 'chat'} onPress={() => setActiveTab('chat')} />
         <TabButton icon="🧹" label="Chores" active={activeTab === 'chores'} onPress={() => setActiveTab('chores')} />
         <TabButton icon="🧾" label="Bills" active={activeTab === 'bills'} onPress={() => setActiveTab('bills')} />
         <TabButton icon="🏆" label="MVP" active={activeTab === 'leaderboard'} onPress={() => setActiveTab('leaderboard')} />
